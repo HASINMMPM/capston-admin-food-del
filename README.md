@@ -3,7 +3,6 @@ http://localhost:3000/v1/user/usersignup
 http://localhost:3000/v1/user/userlogin
 
 http://localhost:3000/v1/food/addfood
-
 http://localhost:3000/v1/food/allfood
 
 [http://localhost:3000/v1/food/deletfood/](http://localhost:3000/v1/food/deletfood/66a05f244aa09db7b17fac63)_id

@@ -32,7 +32,9 @@ export default [
       'react-refresh/only-export-components': [
         'warn',
         { allowConstantExport: true },
-      ],
+      ],'extends': [
+    'plugin:react/recommended'
+]
     },
   },
 ]

@@ -1,9 +1,10 @@
 import React, { useContext } from "react";
-import ResGlobal, { ResContext } from "./Global/ResGlobal";
 import { Table } from "flowbite-react";
+import { Context } from "./Global/ContextList";
 
 const VerifyRes = () => {
-  const { verifyres,conformRes } = useContext(ResContext);
+  const { verifyres, conformRes } = useContext(Context);
+  console.log(verifyres);
   return (
     <div className="w-full py-4 lg:py-14 px-0 lg:px-8">
       <div className="overflow-x-auto">
@@ -12,7 +13,7 @@ const VerifyRes = () => {
             <Table.HeadCell>Image</Table.HeadCell>
             <Table.HeadCell>Name</Table.HeadCell>
             <Table.HeadCell>Place</Table.HeadCell>
-
+            <Table.HeadCell>Owner</Table.HeadCell>
             <Table.HeadCell>Remove</Table.HeadCell>
           </Table.Head>
           <Table.Body className="divide-y">
@@ -29,7 +30,15 @@ const VerifyRes = () => {
                   {verifyres.Title}
                 </Table.Cell>
                 <Table.Cell>{verifyres.Place}</Table.Cell>
-                <Table.Cell>{verifyres.Place}</Table.Cell>
+                <Table.Cell>{verifyres.Owner}</Table.Cell>
+                <Table.Cell>
+                  <button
+                    className="bg-primary p-2 rounded-lg text-white "
+                    onClick={() => conformRes(verifyres._id)}
+                  >
+                    Confirm
+                  </button>
+                </Table.Cell>
               </Table.Row>
             ))}
           </Table.Body>
@@ -38,10 +47,4 @@ const VerifyRes = () => {
     </div>
   );
 };
-export default function App() {
-  return (
-    <ResGlobal>
-      <VerifyRes />
-    </ResGlobal>
-  );
-}
+export default VerifyRes;
