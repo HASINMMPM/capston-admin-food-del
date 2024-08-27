@@ -14,6 +14,8 @@ const ContextList = (props) => {
   const [token, setToken] = useState("");
   const [isAdmin, setIsAdmin] = useState(false);
   const [role, setRole] = useState(false);
+  const[id,setId] =useState()
+  const [loginPage, setLoginPage] = useState(false);
 
   useEffect(() => {
     fetchRes();
@@ -60,6 +62,7 @@ const ContextList = (props) => {
     if (token) {
       const decodedToken = jwtDecode(token);
       setRole(decodedToken.role);
+      setId(decodedToken.id)
       if (decodedToken.role === "Super admin") {
         setIsAdmin(true);
       }
@@ -121,6 +124,26 @@ const ContextList = (props) => {
       console.error("Error fetching res data:", error);
     }
   };
+  // Reject 
+  
+  const rejectRes = async (resid) => {
+    console.log(resid);
+  
+    try {
+      const response = await axios.delete(`${URL}/verify/deletrestauran/${resid}`);
+      console.log(response.data);
+  
+      // Reload the page only if the delete was successful
+      if (response.status === 200) {
+        location.reload();
+      } else {
+        console.warn("Failed to delete restaurant. Status:", response.status);
+      }
+    } catch (error) {
+      console.error("Error deleting restaurant:", error);
+    }
+  };
+  
   const conformRes = async (resid) => {
     console.log(resid);
     try {
@@ -206,6 +229,7 @@ const ContextList = (props) => {
     deleteRes,
     topRes,
     verifyres,
+    rejectRes,
     conformRes,
     foods,
     removeFood,
@@ -213,7 +237,10 @@ const ContextList = (props) => {
     setToken,
     token,
     isAdmin,
-    setIsAdmin,role
+    setIsAdmin,
+    role,
+    id,
+    loginPage,setLoginPage
   };
 
   return (

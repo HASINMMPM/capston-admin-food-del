@@ -56,10 +56,10 @@ const Login = ({ setLoginPage }) => {
       const token = response.data.token;
       console.log("Token received:", token);
   
-      // Save the token in the state
+   
       setToken(token);
   
-      // Store the token in localStorage
+      
       localStorage.setItem("token", token);
   
       setLoginPage(false);
@@ -87,15 +87,15 @@ const Login = ({ setLoginPage }) => {
     try {
       let response;
   
-      // Try the first API endpoint
+      
       try {
         response = await axios.post(`${URL}/admin/adminlogin`, data);
       } catch (error) {
         if (error.response?.status === 400) {
-          // If the first login fails, try the second endpoint
+          
           response = await axios.post(`${URL}/superadminlogin`, data);
         } else {
-          throw error; // If another error, rethrow it
+          throw error; 
         }
       }
   
@@ -177,7 +177,7 @@ const Login = ({ setLoginPage }) => {
             </span>
           </div>
           {title==="Signup"? 
-          <p className="text-red-600">{errors.password?.message}</p>:<></>
+          <p className="text-red-600">{errors.password?.message}</p>:<p className="text-red-600">Password is incorrect</p>
         }
         </div>
 

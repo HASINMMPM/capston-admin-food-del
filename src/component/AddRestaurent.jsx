@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { Context } from "./Global/ContextList";
+import Swal from "sweetalert2";
 
 const AddRestaurent = () => {
   const { URL } = useContext(Context);
@@ -17,14 +18,15 @@ const AddRestaurent = () => {
   };
 
   const onSubmit = async (data) => {
+    console.log("Data",data)
     const formData = new FormData();
-    formData.append("file", image);
+    formData.append("image", image);
     formData.append("title", data.title);
     formData.append("place", data.place);
     formData.append("description", data.description);
     formData.append("type", data.type);
     formData.append("workingtime", data.workingtime);
-    formData.append("ownerNumber", data.ownerNumber);
+    formData.append("ownerId", data.ownerId);
     Swal.fire({
       text: "Restaurant Added successful",
       icon: "success",
@@ -32,16 +34,20 @@ const AddRestaurent = () => {
     });
 
     try {
-      const response = await axios.post(`${URL}/verifyRestaurant`, formData, {
+      const response = await axios.post(`${URL}/verify/verifyrestaurant`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       });
       console.log(response.data);
-      notify();
+      
     } catch (error) {
       console.error("Error registering restaurant:", error);
-      // Handle error (e.g., show an error message)
+      Swal.fire({
+        text: {error},
+        icon: "error",
+        timer: 1000,
+      })
     }
   };
 
@@ -130,21 +136,22 @@ const AddRestaurent = () => {
         </div>
 
         <div className="flex flex-col gap-2">
-          <label className="text-primary" htmlFor="ownerNumber">
-            Owner Phone Number
+          <label className="text-primary" htmlFor="ownerId">
+            Owner Id
           </label>
           <input
-            {...register("ownerNumber", {
-              required: "Owner number is required",
+            {...register("ownerId", {
+              required: "Owner Id is required",
             })}
             className="rounded-md p-2 bg-slate-50 outline-none shadow-md"
-            placeholder="Owner Phone Number"
+            placeholder="Owner Id"
           />
-          <p className="text-red-600">{errors.ownerNumber?.message}</p>
+         <p className="text-red-600">{errors.ownerId?.message}</p>
+
         </div>
 
         <div className="flex flex-col gap-2">
-          <label className="text-primary" htmlFor="file">
+          <label className="text-primary" htmlFor="image">
             Restaurant Image
           </label>
           <input
