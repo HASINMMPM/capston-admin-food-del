@@ -112,7 +112,7 @@ const AddRestaurent = () => {
               <option value="All">All</option>
               <option value="Cake">Cake</option>
               <option value="Veg">Veg</option>
-              <option value="non veg">non veg</option>
+              <option value="non veg">Non veg</option>
             </select>
             <p className="text-red-600">{errors.type?.message}</p>
           </div>
