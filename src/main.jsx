@@ -11,6 +11,10 @@ import VerifyRes from "./component/VerifyRes.jsx";
 import ContextList from "./component/Global/ContextList.jsx";
 import AllFood from "./component/AllFood.jsx";
 import AddRestaurent from "./component/AddRestaurent.jsx";
+import Orders from "./component/Orders.jsx";
+import AddFood from "./component/AddFood.jsx";
+import Comments from "./component/Comment.jsx";
+import CouponForm from "./component/CouponForm.jsx";
 
 const router = createBrowserRouter([
   {
@@ -20,11 +24,14 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element:
-        <div className="flex justify-center items-center w-full">
-          <h1 className="text-xl text-center font-bold font-sub-heading text-primary">Admin Dashboard</h1>,
-        </div>
-          
+        element: (
+          <div className="flex justify-center items-center w-full">
+            <h1 className="text-xl text-center font-bold font-sub-heading text-primary">
+              Admin Dashboard
+            </h1>
+            ,
+          </div>
+        ),
       },
       {
         path: "/alladmin",
@@ -45,6 +52,22 @@ const router = createBrowserRouter([
       {
         path: "/addrestaurent",
         element: <AddRestaurent />,
+      },
+      {
+        path: "/orders",
+        element: <Orders />,
+      },
+      {
+        path: "/adddishes",
+        element: <AddFood />,
+      },
+      {
+        path: "/commments",
+        element: <Comments />,
+      },
+      {
+        path: "/coupon/create",
+        element: <CouponForm />,
       },
     ],
   },

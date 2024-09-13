@@ -75,6 +75,7 @@ const ContextList = (props) => {
     try {
       const response = await axios.get(`${URL}/restuarant/allrestaurant`);
       const resData = response.data;
+      console.log("resData",resData)
       setRes(resData);
     } catch (error) {
       console.error("Error fetching res data:", error);

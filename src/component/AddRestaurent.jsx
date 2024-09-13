@@ -5,7 +5,7 @@ import { Context } from "./Global/ContextList";
 import Swal from "sweetalert2";
 
 const AddRestaurent = () => {
-  const { URL } = useContext(Context);
+  const { URL, id } = useContext(Context);
   const [image, setImage] = useState(null);
   const {
     register,
@@ -18,7 +18,7 @@ const AddRestaurent = () => {
   };
 
   const onSubmit = async (data) => {
-    console.log("Data",data)
+    console.log("Data", data);
     const formData = new FormData();
     formData.append("image", image);
     formData.append("title", data.title);
@@ -30,24 +30,27 @@ const AddRestaurent = () => {
     Swal.fire({
       text: "Restaurant Added successful",
       icon: "success",
-      timer: 1000,
+      timer: 2000,
     });
 
     try {
-      const response = await axios.post(`${URL}/verify/verifyrestaurant`, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      const response = await axios.post(
+        `${URL}/verify/verifyrestaurant`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
       console.log(response.data);
-      
     } catch (error) {
       console.error("Error registering restaurant:", error);
       Swal.fire({
-        text: {error},
+        text: { error },
         icon: "error",
         timer: 1000,
-      })
+      });
     }
   };
 
@@ -140,14 +143,12 @@ const AddRestaurent = () => {
             Owner Id
           </label>
           <input
-            {...register("ownerId", {
-              required: "Owner Id is required",
-            })}
-            className="rounded-md p-2 bg-slate-50 outline-none shadow-md"
-            placeholder="Owner Id"
+            {...register("ownerId")}
+            className="rounded-md p-2 bg-slate-50 text-slate-500 outline-none shadow-md"
+            defaultValue={id}
+            readOnly 
           />
-         <p className="text-red-600">{errors.ownerId?.message}</p>
-
+          <p className="text-red-600">{errors.ownerId?.message}</p>
         </div>
 
         <div className="flex flex-col gap-2">

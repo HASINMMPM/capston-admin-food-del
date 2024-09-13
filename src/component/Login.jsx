@@ -51,20 +51,19 @@ const Login = ({ setLoginPage }) => {
   });
 
   const submitSignup = async (data) => {
+
     try {
-      const response = await axios.post(`${URL}/admin/adminsignup`, data);
+      const response = await axios.post(`${URL}/superadminsignup`, data);
+      console.log(response);
       const token = response.data.token;
       console.log("Token received:", token);
-  
-   
+
       setToken(token);
-  
-      
-      localStorage.setItem("token", token);
-  
+      document.cookie = `token=${token}; path=/; max-age=86400;`;
+
       setLoginPage(false);
-      navigate("/addrestaurent");
-  
+      navigate("/");
+
       Swal.fire({
         text: "Signup successful",
         icon: "success",
@@ -81,48 +80,65 @@ const Login = ({ setLoginPage }) => {
       });
     }
   };
-  
 
   const submitLogin = async (data) => {
     try {
       let response;
+      let token;
   
-      
+      // Attempt Admin Login
       try {
+        console.log("try to admin Log")
         response = await axios.post(`${URL}/admin/adminlogin`, data);
+        console.log(response.data)
+        console.log("Admin login successful");
+        navigate("/addrestaurent");
       } catch (error) {
+        // If admin login fails and the error status is 400, attempt Super Admin Login
         if (error.response?.status === 400) {
-          
+          console.log("Attempting Super Admin login...");
           response = await axios.post(`${URL}/superadminlogin`, data);
+          navigate("/"); // Change the route after Super Admin login
+          console.log("Super Admin login successful");
         } else {
-          throw error; 
+          throw error; // Throw the error if it's not a 400 status
         }
       }
   
-      const token = response.data.token;
-      setToken(token);
-      document.cookie = `token=${token}; path=/; max-age=86400;`;
+      // Extract token from the response
+      token = response?.data?.token;
+      if (token) {
+        // Set the token in cookies
+        setToken(token);
+        document.cookie = `token=${token}; path=/; max-age=86400;`;
   
-      setLoginPage(false);
-      navigate("/addrestaurent");
+        // Reload page to reflect login status
+        setLoginPage(false);
+        location.reload();
   
-      Swal.fire({
-        text: "Login successful",
-        icon: "success",
-        timer: 1000,
-        showConfirmButton: false,
-      });
+        // Show success alert
+        Swal.fire({
+          text: "Login successful",
+          icon: "success",
+          timer: 1000,
+          showConfirmButton: false,
+        });
+      } else {
+        throw new Error("Token not received. Login failed.");
+      }
+  
     } catch (error) {
-      console.log(error.response?.data || error.message);
+      // General error handling
+      console.error("Login Error:", error.response?.data || error.message);
+  
       Swal.fire({
-        text: "Login failed. Please try again.",
+        text: error.response?.data?.msg || "Login failed. Please try again.",
         icon: "error",
         timer: 3000,
         showConfirmButton: false,
       });
     }
   };
-  
   
 
   return (
@@ -141,7 +157,7 @@ const Login = ({ setLoginPage }) => {
               Full Name
             </label>
             <input
-              {...register("fullName")}
+              {...register("name")}
               className="rounded-md p-2 bg-slate-50 outline-none shadow-md"
               placeholder="Full Name"
             />
@@ -176,9 +192,11 @@ const Login = ({ setLoginPage }) => {
               {icon}
             </span>
           </div>
-          {title==="Signup"? 
-          <p className="text-red-600">{errors.password?.message}</p>:<p className="text-red-600">Password is incorrect</p>
-        }
+          {title === "Signup" ? (
+            <p className="text-red-600">{errors.password?.message}</p>
+          ) : (
+            <p className="text-red-600">Password is incorrect</p>
+          )}
         </div>
 
         {title === "Signup" && (

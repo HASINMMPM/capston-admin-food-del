@@ -11,10 +11,14 @@ const AllAdmin = () => {
   if (!token) {
     return (
       <div className="w-full  flex flex-col gap-4 justify-center items-center">
-       
         <h2 className="text-2xl  text-black  font-bold ">
           You are not logged in{" "}
-          <span className="text-primary cursor-pointer" onClick={() => setLoginPage(true)}>Click here to login</span>
+          <span
+            className="text-primary cursor-pointer"
+            onClick={() => setLoginPage(true)}
+          >
+            Click here to login
+          </span>
         </h2>
       </div>
     );

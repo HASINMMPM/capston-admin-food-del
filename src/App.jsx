@@ -16,7 +16,7 @@ export default function App() {
       <Header setLoginPage={setLoginPage} />
       <div className="flex flex-row">
         <Sidebar />
-        {/* Conditional rendering with ternary operator */}
+       
         {!token ? (
           <p>
             You are not logged in.{" "}

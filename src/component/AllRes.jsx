@@ -28,6 +28,7 @@ const AllRes = () => {
               <Table.HeadCell>Name</Table.HeadCell>
               <Table.HeadCell>Place</Table.HeadCell>
               <Table.HeadCell>Top restaurent</Table.HeadCell>
+              <Table.HeadCell>Owner</Table.HeadCell>
               <Table.HeadCell>Remove</Table.HeadCell>
             </Table.Head>
             <Table.Body className="divide-y">
@@ -58,6 +59,7 @@ const AllRes = () => {
                         : "Mark as Top"}
                     </button>
                   </Table.Cell>
+                  <Table.Cell>{res.Owner}</Table.Cell>
                   <Table.Cell>
                     <button
                       onClick={() => deleteRes(res._id)}

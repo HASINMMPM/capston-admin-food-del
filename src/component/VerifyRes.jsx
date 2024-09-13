@@ -1,21 +1,23 @@
 import React, { useContext } from "react";
 import { Table } from "flowbite-react";
 import { Context } from "./Global/ContextList";
+import { ImCross } from "react-icons/im";
 
 const VerifyRes = () => {
-  const { verifyres, conformRes,rejectRes,role } = useContext(Context);
+  const { verifyres, conformRes,rejectRes,isAdmin } = useContext(Context);
   console.log(verifyres);
-  if(role === "Admin"){
+  if (!isAdmin) {
     return (
-      <div className="flex flex-col gap-4 items-center justify-center min-h-screen">
-        <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
-          Admin Only
-        </h1>
-        <p className="text-lg text-gray-600 dark:text-gray-400">
-          You are not authorized to view this page.
-        </p>
+      <div className="w-full text-red-700  flex flex-col gap-4 justify-center items-center">
+        <ImCross className="h-1/2 w-1/2 opacity-30 " />
+        <div className="">
+        <h2 className="text-2xl  font-bold ">Super Admin Only</h2>
+        <h2 className="text-xl  font-bold ">You can't see this page</h2>
+
+        </div>
       </div>
-    )}
+    );
+  } 
     else{
       if (verifyres.length === 0) return <p>No results found.</p>;
       else {
