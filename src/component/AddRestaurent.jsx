@@ -45,7 +45,10 @@ const AddRestaurent = () => {
       );
       console.log(response.data);
     } catch (error) {
-      console.error("Error registering restaurant:", error.response.data.message);
+      console.error(
+        "Error registering restaurant:",
+        error.response.data.message
+      );
       Swal.fire({
         text: error.response.data.message,
         icon: "error",
@@ -146,7 +149,7 @@ const AddRestaurent = () => {
             {...register("ownerId")}
             className="rounded-md p-2 bg-slate-50 text-slate-500 outline-none shadow-md"
             defaultValue={id}
-            readOnly 
+            readOnly
           />
           <p className="text-red-600">{errors.ownerId?.message}</p>
         </div>
