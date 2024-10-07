@@ -25,9 +25,9 @@ const CouponForm = () => {
       );
       console.log(response)
       Swal.fire({
-        text: response.data.message,
+        text: response.data.message + expiresAt,
         icon: "success",
-        timer: 1000,
+        timer: 2000,
         showConfirmButton: false,
       });
       setMessage('Coupon created successfully!');
@@ -54,7 +54,7 @@ const CouponForm = () => {
             onChange={(e) => setCode(e.target.value)}
             placeholder="Enter coupon code"
             required
-            className="w-full p-2 border border-gray-300 rounded"
+            className="w-full p-2 border border-gray-300 rounded uppercase"
           />
         </div>
 

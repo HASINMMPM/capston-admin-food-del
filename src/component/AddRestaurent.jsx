@@ -45,11 +45,11 @@ const AddRestaurent = () => {
       );
       console.log(response.data);
     } catch (error) {
-      console.error("Error registering restaurant:", error);
+      console.error("Error registering restaurant:", error.response.data.message);
       Swal.fire({
-        text: { error },
+        text: error.response.data.message,
         icon: "error",
-        timer: 1000,
+        timer: 3000,
       });
     }
   };
@@ -115,7 +115,7 @@ const AddRestaurent = () => {
               <option value="All">All</option>
               <option value="Cake">Cake</option>
               <option value="Veg">Veg</option>
-              <option value="non veg">Non veg</option>
+              <option value="non veg">Meat</option>
             </select>
             <p className="text-red-600">{errors.type?.message}</p>
           </div>

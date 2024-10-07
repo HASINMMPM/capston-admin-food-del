@@ -142,7 +142,7 @@ const Login = ({ setLoginPage }) => {
   
 
   return (
-    <div className="flex flex-col justify-center items-center h-lvh absolute z-40 max-h-max bg-black/40 max-w-screen-2xl w-full">
+    <div className="flex flex-col justify-center items-center h-screen absolute z-40  bg-black/40 max-w-screen-2xl w-full">
       <form
         onSubmit={handleSubmit(title === "Signup" ? submitSignup : submitLogin)}
         className="flex flex-col gap-3 rounded-xl w-3/4 md:w-1/2 mx-auto bg-white overflow-hidden shadow-2xl p-6"
