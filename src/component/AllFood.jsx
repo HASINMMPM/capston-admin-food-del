@@ -21,6 +21,7 @@ const AllFood = () => {
           <Table.Head>
             <Table.HeadCell>Image</Table.HeadCell>
             <Table.HeadCell>Name</Table.HeadCell>
+            <Table.HeadCell>Price</Table.HeadCell>
             <Table.HeadCell>Description</Table.HeadCell>
             <Table.HeadCell>Restaurant</Table.HeadCell>
             <Table.HeadCell>popularDish</Table.HeadCell>
@@ -38,6 +39,9 @@ const AllFood = () => {
                 </Table.Cell>
                 <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white uppercase">
                   {foods.title}
+                </Table.Cell>
+                <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white uppercase">
+                  {foods.price}
                 </Table.Cell>
                 <Table.Cell className="w-1/4 md:w-auto">
                   {foods.description}
