@@ -71,9 +71,9 @@ const Login = ({ setLoginPage }) => {
         showConfirmButton: false,
       });
     } catch (error) {
-      console.log(error.response?.data || error.message || "error");
+      console.log(error.response.data.msg);
       Swal.fire({
-        text: "Signup failed. Please try again.",
+        text: error.response.data.msg,
         icon: "error",
         timer: 3000,
         showConfirmButton: false,
@@ -94,18 +94,18 @@ const Login = ({ setLoginPage }) => {
         console.log("Admin login successful");
         navigate("/addrestaurent");
       } catch (error) {
-        // If admin login fails and the error status is 400, attempt Super Admin Login
+       
         if (error.response?.status === 400) {
           console.log("Attempting Super Admin login...");
           response = await axios.post(`${URL}/superadminlogin`, data);
-          navigate("/"); // Change the route after Super Admin login
+          navigate("/"); 
           console.log("Super Admin login successful");
         } else {
-          throw error; // Throw the error if it's not a 400 status
+          throw error; 
         }
       }
   
-      // Extract token from the response
+     
       token = response?.data?.token;
       if (token) {
         // Set the token in cookies

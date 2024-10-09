@@ -21,7 +21,7 @@ const Orders = () => {
       const fetchedOrders = response.data;
       console.log("response of order", response);
 
-      // Sorting orders by createdAt field (latest orders first)
+     
       fetchedOrders.sort(
         (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
       );
