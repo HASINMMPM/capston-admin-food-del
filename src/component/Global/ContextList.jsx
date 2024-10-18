@@ -6,7 +6,8 @@ import Swal from "sweetalert2";
 export const Context = createContext();
 
 const ContextList = (props) => {
-  const URL = "https://foodorder-backend-3.onrender.com/v1";
+  // const URL = "https://foodorder-backend-3.onrender.com/v1";
+  const URL = "http://localhost:3000/v1";
   const [admin, setAdmin] = useState([]);
   const [res, setRes] = useState([]);
   const [verifyres, setVerifyRes] = useState([]);
@@ -62,6 +63,7 @@ const ContextList = (props) => {
     if (token) {
       const decodedToken = jwtDecode(token);
       setRole(decodedToken.role);
+      console.log("decodedToken",decodedToken)
       setId(decodedToken.id)
       if (decodedToken.role === "Super admin") {
         setIsAdmin(true);
@@ -152,6 +154,11 @@ const ContextList = (props) => {
         `${URL}/restuarant/addrestuarant/${resid}`
       );
       console.log(response.data);
+      Swal.fire({
+        text:response.data,
+        icon: "success",
+        timer: 2000,
+      });
     } catch (error) {
       console.error("Error updating restaurant:", error);
     }

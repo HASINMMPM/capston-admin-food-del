@@ -18,12 +18,14 @@ export default function App() {
         <Sidebar />
        
         {!token ? (
-          <p>
+         <div className="flex w-full justify-center items-center text-lg md:text-2xl">
+           <p>
             You are not logged in.{" "}
-            <span onClick={() => setLoginPage(true)} className="text-blue-500 cursor-pointer">
+            <span onClick={() => setLoginPage(true)} className="text-primary underline cursor-pointer">
               Click here to Login
             </span>
           </p>
+         </div>
         ) : (
           <Outlet />
         )}

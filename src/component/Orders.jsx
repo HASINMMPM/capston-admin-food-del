@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Table } from "flowbite-react";
 import { FaUsersSlash } from "react-icons/fa6";
-import { ImCross } from "react-icons/im"; // Import ImCross for not admin case
+import { ImCross } from "react-icons/im";
 import { useContext } from "react";
 import axios from "axios";
 import { Context } from "./Global/ContextList";

@@ -1,16 +1,15 @@
-import React, { useContext } from 'react'
-import { Context } from './Global/ContextList';
+import React, { useContext } from "react";
+import { Context } from "./Global/ContextList";
 
 const Footer = () => {
-    const {  role,id } = useContext(Context);
+  const { id } = useContext(Context);
   return (
-    <main className='flex flex-col md:flex-row justify-between items-center  bg-primary w-full text-sm md:text-xl py-2'>
-        
-        <p className='text-secondary'>User ID: <span className='text-white'>{id}</span> </p>
-   
-      {/* Add more footer content here */}
-    </main>
-  )
-}
+    <footer className="flex flex-col md:flex-row justify-between items-center  bg-primary w-full text-sm md:text-xl ">
+      <p className="text-slate-100 ml-2">
+        User ID: <span className="text-white">{id}</span>{" "}
+      </p>
+    </footer>
+  );
+};
 
-export default Footer
+export default Footer;

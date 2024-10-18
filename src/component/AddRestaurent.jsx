@@ -58,7 +58,7 @@ const AddRestaurent = () => {
   };
 
   return (
-    <div className="flex flex-col w-full justify-center items-center h-screen">
+    <div className="flex flex-col w-full justify-center items-center ">
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="flex flex-col gap-3 rounded-xl w-3/4 md:w-1/2 mx-auto overflow-hidden shadow-2xl p-6"
