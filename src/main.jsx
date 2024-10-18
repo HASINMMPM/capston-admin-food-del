@@ -15,6 +15,7 @@ import Orders from "./component/Orders.jsx";
 import AddFood from "./component/AddFood.jsx";
 import Comments from "./component/Comment.jsx";
 import CouponForm from "./component/CouponForm.jsx";
+import OrderAdmin from "./component/OrderAdmin.jsx";
 
 const router = createBrowserRouter([
   {
@@ -56,6 +57,10 @@ const router = createBrowserRouter([
       {
         path: "/orders",
         element: <Orders />,
+      },
+      {
+        path: "/restaurent/orders",
+        element: <OrderAdmin />,
       },
       {
         path: "/adddishes",
