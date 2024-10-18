@@ -39,6 +39,7 @@ const Sidebar = () => {
   const adminSideItems = [
     { label: "Add Restaurant", icon: addres, href: "/addrestaurent" },
     { label: "Add Food", icon: addfoods, href: "/adddishes" },
+    { label: "Orders", icon: ShoppingCartIcon, href: "/restaurent/orders" },
    
   ];
   return (
