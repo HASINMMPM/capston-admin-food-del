@@ -6,8 +6,8 @@ import Swal from "sweetalert2";
 export const Context = createContext();
 
 const ContextList = (props) => {
-  // const URL = "https://foodorder-backend-3.onrender.com/v1";
-  const URL = "http://localhost:3000/v1";
+  const URL = "https://foodorder-backend-3.onrender.com/v1";
+  // const URL = "http://localhost:3000/v1";
   const [admin, setAdmin] = useState([]);
   const [res, setRes] = useState([]);
   const [verifyres, setVerifyRes] = useState([]);
@@ -77,7 +77,7 @@ const ContextList = (props) => {
     try {
       const response = await axios.get(`${URL}/restuarant/allrestaurant`);
       const resData = response.data;
-      console.log("resData",resData)
+      // console.log("resData",resData)
       setRes(resData);
     } catch (error) {
       console.error("Error fetching res data:", error);
