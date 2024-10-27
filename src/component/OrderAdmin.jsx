@@ -16,9 +16,11 @@ const OrderAdmin = () => {
     const admURL = `${URL}/admin/singeladmin/${id}`;
     try {
       const response = await axios.get(admURL);
+      console.log(response.data.restaurant._id)
       setResId(response.data.restaurant._id);
     } catch (error) {
-      console.error("Error fetching admin data:", error);
+      console.error("Error fetching admin data:", error.response.data);
+      alert(`${error.response.data.msg} to show order`)
     }
   };
 
@@ -72,77 +74,79 @@ const OrderAdmin = () => {
         <p>{error}</p>
       </div>
     );
+  }else{
+    return (
+      <div className="w-full py-4 lg:py-14 px-0 lg:px-8">
+        {orders.length === 0 ? (
+          <div className="w-full flex text-primary opacity-25 justify-center items-center h-full">
+            <h3>There is no Order</h3>
+          </div>
+        ) : (
+          <div className="overflow-x-auto">
+            <Table>
+              <Table.Head>
+                <Table.HeadCell>Item</Table.HeadCell>
+                <Table.HeadCell>User</Table.HeadCell>
+                <Table.HeadCell>Amount</Table.HeadCell>
+                <Table.HeadCell>Status</Table.HeadCell>
+                <Table.HeadCell>Address</Table.HeadCell>
+              </Table.Head>
+              <Table.Body className="divide-y">
+                {orders.map((order, index) => (
+                  <Table.Row key={index}>
+                    <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white uppercase">
+                      {order.items
+                        .filter((item) => item.restaurant === resId)
+                        .map((item, itemIndex) => (
+                          <div key={itemIndex}>
+                            <span>
+                              {item.title} (
+                              <span className="font-bold">{item.quantity}</span>)
+                            </span>
+                          </div>
+                        ))}
+                    </Table.Cell>
+  
+                    <Table.Cell>{order.userId}</Table.Cell>
+  
+                    <Table.Cell>
+                      {order.items
+                        .filter((item) => item.restaurant === resId)
+                        .map((item, itemIndex) => (
+                          <div key={itemIndex}>
+                            <span>{item.price}</span>
+                          </div>
+                        ))}
+                    </Table.Cell>
+  
+                    <Table.Cell>
+                      <i>{order.status}</i>
+                    </Table.Cell>
+  
+                    <Table.Cell>
+                      <div className="flex flex-col">
+                        <span>
+                          Name: <strong>{order.name}</strong>
+                        </span>
+                        <span>
+                          Address: <strong>{order.address}</strong>
+                        </span>
+                        <span>
+                          {order.city}, {order.district}, {order.zip}
+                        </span>
+                      </div>
+                    </Table.Cell>
+                  </Table.Row>
+                ))}
+              </Table.Body>
+            </Table>
+          </div>
+        )}
+      </div>
+    );
   }
 
-  return (
-    <div className="w-full py-4 lg:py-14 px-0 lg:px-8">
-      {orders.length === 0 ? (
-        <div className="w-full flex text-primary opacity-25 justify-center items-center h-full">
-          <h3>There is no Order</h3>
-        </div>
-      ) : (
-        <div className="overflow-x-auto">
-          <Table>
-            <Table.Head>
-              <Table.HeadCell>Item</Table.HeadCell>
-              <Table.HeadCell>User</Table.HeadCell>
-              <Table.HeadCell>Amount</Table.HeadCell>
-              <Table.HeadCell>Status</Table.HeadCell>
-              <Table.HeadCell>Address</Table.HeadCell>
-            </Table.Head>
-            <Table.Body className="divide-y">
-              {orders.map((order, index) => (
-                <Table.Row key={index}>
-                  <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white uppercase">
-                    {order.items
-                      .filter((item) => item.restaurant === resId)
-                      .map((item, itemIndex) => (
-                        <div key={itemIndex}>
-                          <span>
-                            {item.title} (
-                            <span className="font-bold">{item.quantity}</span>)
-                          </span>
-                        </div>
-                      ))}
-                  </Table.Cell>
-
-                  <Table.Cell>{order.userId}</Table.Cell>
-
-                  <Table.Cell>
-                    {order.items
-                      .filter((item) => item.restaurant === resId)
-                      .map((item, itemIndex) => (
-                        <div key={itemIndex}>
-                          <span>{item.price}</span>
-                        </div>
-                      ))}
-                  </Table.Cell>
-
-                  <Table.Cell>
-                    <i>{order.status}</i>
-                  </Table.Cell>
-
-                  <Table.Cell>
-                    <div className="flex flex-col">
-                      <span>
-                        Name: <strong>{order.name}</strong>
-                      </span>
-                      <span>
-                        Address: <strong>{order.address}</strong>
-                      </span>
-                      <span>
-                        {order.city}, {order.district}, {order.zip}
-                      </span>
-                    </div>
-                  </Table.Cell>
-                </Table.Row>
-              ))}
-            </Table.Body>
-          </Table>
-        </div>
-      )}
-    </div>
-  );
+ 
 };
 
 export default OrderAdmin;

@@ -18,7 +18,7 @@ const AdminFoodshow = () => {
       setResId(response.data.restaurant._id);
     } catch (error) {
       console.error("Error fetching admin data:", error);
-      setError("Failed to fetch admin data.");
+      setError( alert(`${error.response.data.msg} to show Foods`));
     }
   };
 
