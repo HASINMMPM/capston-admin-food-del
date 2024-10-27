@@ -40,7 +40,7 @@ const Sidebar = () => {
     { label: "Add Restaurant", icon: addres, href: "/addrestaurent" },
     { label: "Add Food", icon: addfoods, href: "/adddishes" },
     { label: "Orders", icon: ShoppingCartIcon, href: "/restaurent/orders" },
-   
+    { label: "All Foods", icon: foods, href: "/restaurent/allfoods" },
   ];
   return (
     <div className=" w-16 lg:w-64  container bg-secondary">
