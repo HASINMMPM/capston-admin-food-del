@@ -31,7 +31,7 @@ const ContextList = (props) => {
     try {
       const response = await axios.get(`${URL}/admin/getalladmin`);
       const adminData = response.data;
-      console.log(adminData);
+      // console.log(adminData);
       setAdmin(adminData);
     } catch (error) {
       console.error("Error fetching admin data:", error);
@@ -39,12 +39,12 @@ const ContextList = (props) => {
   };
 
   const deleteAdmin = async (adminId) => {
-    console.log(adminId);
+    // console.log(adminId);
     try {
       const response = await axios.delete(
         `${URL}/admin/deleteadmin/${adminId}`
       );
-      console.log(response.data);
+      // console.log(response.data);
       Swal.fire({
         text: "Admin deleted Successfully",
         icon: "success",
@@ -63,7 +63,7 @@ const ContextList = (props) => {
     if (token) {
       const decodedToken = jwtDecode(token);
       setRole(decodedToken.role);
-      console.log("decodedToken",decodedToken)
+      // console.log("decodedToken",decodedToken)
       setId(decodedToken.id)
       if (decodedToken.role === "Super admin") {
         setIsAdmin(true);
@@ -85,12 +85,12 @@ const ContextList = (props) => {
   };
 
   const deleteRes = async (resid) => {
-    console.log(resid);
+    // console.log(resid);
     try {
       const response = await axios.delete(
         `${URL}/restuarant/deletrestauran/${resid}`
       );
-      console.log(response.data);
+      // console.log(response.data);
       setRes((prevRes) => prevRes.filter((res) => res._id !== resid));
       location.reload();
     } catch (error) {
@@ -98,13 +98,13 @@ const ContextList = (props) => {
     }
   };
   const topRes = async (resid) => {
-    console.log(resid);
+    // console.log(resid);
     try {
       const response = await axios.put(
         `${URL}/restuarant/addbestrestaurent/${resid}`,
         { BestRestaurant: true } // Send the update data
       );
-      console.log(response.data);
+      // console.log(response.data);
 
       setRes((prevRes) =>
         prevRes.map((res) =>
@@ -130,11 +130,11 @@ const ContextList = (props) => {
   // Reject 
   
   const rejectRes = async (resid) => {
-    console.log(resid);
+    // console.log(resid);
   
     try {
       const response = await axios.delete(`${URL}/verify/deletrestauran/${resid}`);
-      console.log(response.data);
+      // console.log(response.data);
   
       // Reload the page only if the delete was successful
       if (response.status === 200) {
@@ -148,12 +148,12 @@ const ContextList = (props) => {
   };
   
   const conformRes = async (resid) => {
-    console.log(resid);
+    // console.log(resid);
     try {
       const response = await axios.post(
         `${URL}/restuarant/addrestuarant/${resid}`
       );
-      console.log(response.data);
+      // console.log(response.data);
       Swal.fire({
         text:response.data,
         icon: "success",
@@ -176,7 +176,7 @@ const ContextList = (props) => {
     }
   };
   const removeFood = async (foodId) => {
-    console.log(foodId);
+    // console.log(foodId);
 
     Swal.fire({
       title: "Are you sure?",
@@ -192,7 +192,7 @@ const ContextList = (props) => {
           const response = await axios.delete(
             `${URL}/food/deletfood/${foodId}`
           );
-          console.log(response.data);
+          // console.log(response.data);
 
           Swal.fire({
             title: "Deleted!",
@@ -215,10 +215,10 @@ const ContextList = (props) => {
   };
 
   const popularDish = async (foodId) => {
-    console.log(foodId);
+    // console.log(foodId);
     try {
       const response = await axios.put(`${URL}/food/editfood/${foodId}`);
-      console.log(response.data);
+      // console.log(response.data);
       setRes((prevRes) =>
         prevRes.map((food) => (food._id === foodId ? response.data : food))
       );

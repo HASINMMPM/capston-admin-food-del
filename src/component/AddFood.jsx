@@ -35,7 +35,7 @@ const AddDishes = () => {
     // Fetch admin details
     const fetchAdmin = async () => {
       const admURL = `${URL}/admin/singeladmin/${id}`;
-      console.log(admURL);
+      // console.log(admURL);
       try {
         const response = await axios.get(admURL);
         // console.log(response.data)
@@ -44,14 +44,14 @@ const AddDishes = () => {
         setResId(response.data.restaurant._id);
       } catch (error) {
         console.error("Error fetching admin data:", error);
-        console.log(error.response.data);
+        // console.log(error.response.data);
       }
     };
 
     fetchCategories();
     fetchAdmin();
   }, [URL, id]);
-  console.log("single admin", singleAdmin);
+  // console.log("single admin", singleAdmin);
   // Handle form submission
   const onSubmit = async (data) => {
     console.log("data",data)
